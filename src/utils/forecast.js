@@ -11,7 +11,13 @@ const forecast = (latitude , longtitude, callback) => {
         } else if (body.error) {
             console.log(chalk.red.inverse('Unable to find location'), undefined)
         } else {
-            callback(undefined, body.current.weather_descriptions[0] + ". It is currently " + body.current.temperature + " degress Celcius out."+"With a " + body.current.precip + "% chance of rain!")
+            const summary = body.current.weather_descriptions[0]
+            const temp = body.current.temperature
+            const rainPred = body.current.precip 
+            const windSpeed = body.current.wind_speed
+            const humid = body.current.humidity
+            callback(undefined,`Overal: ${summary} with a ${rainPred}% chance of rain. 
+            Temperature at ${temp}C - wind speed  ${windSpeed} klm and humidity at ${humid}%.`)
         }
     })
 }
